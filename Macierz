@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int macierz (int wielkość, int **tab){
+    int k;
+    if (wielkość == 2){
+       k = tab[0][0]*tab[1][1]-tab[0][1]*tab[1][0];
+        return k;
+    }
+    else if (wielkość == 3){
+        int Wyznacznik;
+        int Wyznacznik_1=(tab[0][0]*tab[1][1]*tab[2][2])+(tab[0][1]*tab[1][2]*tab[2][0])+(tab[0][2]*tab[1][0]*tab[2][1]);
+        int Wyznacznik_2=(tab[2][0]*tab[1][1]*tab[0][2])+(tab[2][1]*tab[1][2]*tab[0][0])+(tab[2][2]*tab[1][0]*tab[0][1]);
+        Wyznacznik=Wyznacznik_1-Wyznacznik_2;
+        return Wyznacznik;
+    }
+    else
+        cout << "brak danych";
+}
+int main() {
+    srand(time(NULL));
+    int n = 3;
+    int **tabl;
+    tabl=new int *[n];
+    tabl[0]=new int [n];
+    tabl[1]= new int [n];
+    tabl[2] = new int [n];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            tabl[i][j] = (rand() % 11);
+            cout << tabl[i][j] << " ";
+        }
+        cout << endl;
+    }
+    macierz(n,tabl);
+    cout << endl << macierz (n,tabl);
+    return 0;
+}
